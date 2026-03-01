@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Israr Ahmed | Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <noscript>
+        <style>
+            #preloader {
+                display: none !important;
+            }
+        </style>
+    </noscript>
+
+    <style>
+        /* =========================================
+           BASE BRAND VARIABLES
+           ========================================= */
+        :root {
+            --bg-color: #F0EEE9;
+            --text-main: #0A1128;
+            --accent: #D90429;
+
+            --spacing-sm: 5vh;
+            --spacing-md: 10vh;
+            --spacing-lg: 20vh;
+            --grid-gap: 2rem;
+            --page-padding: 4vw;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0A1128;
+            --text-main: #F0EEE9;
+            --accent: #FF2A50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.4;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-font-smoothing: antialiased;
+            cursor: none;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* =========================================
+           "IMPERFECT SEQUENCE" PRELOADER
+           ========================================= */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-color);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .loader-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            color: var(--text-main);
+            font-weight: 500;
+            line-height: 1;
+            transition: transform 0.05s, color 0.3s ease;
+        }
+
+        .loader-text.glitch-1 {
+            transform: translate(-4px, 2px) skewX(2deg);
+            opacity: 0.8;
+        }
+
+        .loader-text.glitch-2 {
+            transform: translate(3px, -3px) skewX(-2deg);
+            opacity: 0.9;
+        }
+
+        .loader-text.perfect {
+            transform: translate(0, 0) skewX(0);
+            color: var(--accent);
+            opacity: 1;
+        }
+
+        /* =========================================
+           UI OVERLAYS & CUSTOM CURSOR
+           ========================================= */
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 18px;
+            height: 18px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.25s, height 0.25s, background-color 0.25s, border 0.25s, opacity 0.2s;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            opacity: 1;
+        }
+
+        [data-theme="dark"] #custom-cursor {
+            border-color: #0A1128;
+        }
+
+        #custom-cursor.hovered {
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            box-shadow: none;
+        }
+
+        .floating-btn {
+            position: fixed;
+            right: var(--page-padding);
+            z-index: 100;
+            background: var(--bg-color);
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 8px 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease;
+            cursor: none;
+            backdrop-filter: blur(4px);
+        }
+
+        .floating-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        #themeToggle {
+            top: 30px;
+        }
+
+        #backToTop {
+            bottom: 30px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.4s, transform 0.4s, visibility 0.4s;
+        }
+
+        #backToTop.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #globalCloseDemo {
+            position: fixed;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9000;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s;
+        }
+
+        #globalCloseDemo:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        #globalCloseDemo.visible {
+            bottom: 40px;
+        }
+
+        /* =========================================
+           TYPOGRAPHY
+           ========================================= */
+        h1,
+        h2,
+        h3,
+        .heading-font {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .huge-text {
+            font-size: clamp(2.5rem, 10vw, 9rem);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            word-wrap: break-word;
+        }
+
+        .statement-text {
+            font-size: clamp(1.4rem, 6vw, 4rem);
+            line-height: 1.15;
+            font-weight: 500;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* 3/4 VISIBLE, OUTLINED CHAPTER NUMBER */
+        .chapter-marker {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 var(--page-padding);
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(8rem, 20vw, 18rem);
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--text-main);
+            opacity: 0.15;
+            line-height: 0.7;
+            margin-bottom: -8vw;
+            position: relative;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .tiny-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+
+        .section-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .accent-text {
+            color: var(--accent);
+        }
+
+        a {
+            color: var(--text-main);
+            text-decoration: none;
+            cursor: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        /* =========================================
+           LAYOUT & COMPARTMENTALIZATION
+           ========================================= */
+        section {
+            width: 100%;
+            min-height: 100vh;
+            padding: var(--spacing-sm) var(--page-padding);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        section:not(.full-bleed) {
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .full-bleed {
+            padding: 0;
+            position: relative;
+            max-width: 100%;
+            margin: 0;
+            height: 100vh;
+            height: 100svh;
+            z-index: 1;
+        }
+
+        .project-divider {
+            width: 100%;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 1px;
+            background-color: var(--text-main);
+            opacity: 0.15;
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .chapter-heading {
+            margin: var(--spacing-md) 0 2rem 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: var(--accent);
+            border-bottom: 1px solid var(--text-main);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(10, 17, 40, 0.7) 0%, rgba(10, 17, 40, 0.2) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-corner {
+            position: absolute;
+            bottom: var(--page-padding);
+            left: var(--page-padding);
+            z-index: 10;
+            color: #fff;
+            width: 85%;
+        }
+
+        .project-title-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            color: #fff;
+            width: 90%;
+        }
+
+        /* =========================================
+           MEDIA & GRIDS
+           ========================================= */
+        img,
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background-color: #222;
+        }
+
+        img {
+            transition: filter 0.2s ease-out;
+        }
+
+        @media (hover: hover) {
+            img {
+                filter: grayscale(100%);
+            }
+
+            img:hover {
+                filter: grayscale(0%);
+            }
+        }
+
+        .hero-media {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* EDITORIAL LAYOUT GRIDS */
+        .grid-1up {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--grid-gap);
+            margin-bottom: var(--grid-gap);
+        }
+
+        .grid-2up {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--grid-gap);
+            margin-bottom: var(--grid-gap);
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--grid-gap);
+            margin-bottom: var(--grid-gap);
+        }
+
+        /* PRECISE ASPECT RATIOS */
+        .ratio-16-9 {
+            aspect-ratio: 16 / 9;
+        }
+
+        .ratio-9-16 {
+            aspect-ratio: 9 / 16;
+        }
+
+        .ratio-1-1 {
+            aspect-ratio: 1 / 1;
+        }
+
+        .ratio-3-4 {
+            aspect-ratio: 3 / 4;
+        }
+
+        .ratio-4-3 {
+            aspect-ratio: 4 / 3;
+        }
+
+        /* FLOATING PURE SCREEN MOCKUP */
+        .screen-mockup {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .screen-mockup:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .screen-mockup img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: none;
+        }
+
+        /* BROWSER FRAME / LIVE DEMO */
+        .browser-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 1px solid var(--text-main);
+            border-radius: 4px 4px 0 0;
+            overflow: hidden;
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .browser-top-bar {
+            height: 28px;
+            flex-shrink: 0;
+            border-bottom: 1px solid var(--text-main);
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            gap: 6px;
+        }
+
+        .browser-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 1px solid var(--text-main);
+            opacity: 0.5;
+        }
+
+        .open-new-tab {
+            margin-left: auto;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            display: none;
+            border: none;
+            transition: color 0.2s;
+            opacity: 0.6;
+        }
+
+        .open-new-tab:hover {
+            color: var(--accent);
+            opacity: 1;
+            border: none;
+        }
+
+        .open-new-tab.visible {
+            display: block;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            flex-grow: 1;
+            cursor: none;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 17, 40, 0.4);
+            z-index: 5;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .play-btn-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #fff;
+            letter-spacing: 0.05em;
+            border: 2px solid #fff;
+            padding: 0.5rem 2rem;
+            border-radius: 2px;
+            backdrop-filter: blur(4px);
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .video-overlay:hover .play-btn-text {
+            background: #fff;
+            color: var(--text-main);
+        }
+
+        .demo-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #fff;
+            z-index: 10;
+        }
+
+        .video-wrapper.demo-active .video-overlay,
+        .video-wrapper.demo-active video {
+            display: none;
+        }
+
+        /* =========================================
+           STRATEGY ACCORDION STYLES
+           ========================================= */
+        .strategy-accordion {
+            width: 100%;
+            margin: var(--spacing-sm) 0 var(--spacing-md) 0;
+            border-top: 1px solid rgba(10, 17, 40, 0.15);
+        }
+
+        [data-theme="dark"] .strategy-accordion {
+            border-top-color: rgba(240, 238, 233, 0.15);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid rgba(10, 17, 40, 0.15);
+        }
+
+        [data-theme="dark"] .accordion-item {
+            border-bottom-color: rgba(240, 238, 233, 0.15);
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            cursor: none;
+            background: transparent;
+            border: none;
+            width: 100%;
+            color: var(--text-main);
+            text-align: left;
+        }
+
+        .accordion-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .accordion-icon {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+            line-height: 1;
+        }
+
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .accordion-content-inner {
+            overflow: hidden;
+        }
+
+        .accordion-inner-padding {
+            padding-bottom: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            opacity: 0.8;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+            color: var(--accent);
+        }
+
+        .accordion-item.active .accordion-content {
+            grid-template-rows: 1fr;
+        }
+
+        /* =========================================
+           FOOTER SPECIFIC STYLES 
+           ========================================= */
+        #page-19 {
+            padding-top: var(--spacing-lg);
+            padding-bottom: 10vh;
+        }
+
+        .footer-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: var(--spacing-md);
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-bottom: 2px solid rgba(10, 17, 40, 0.2);
+            padding-bottom: 3rem;
+            width: 100%;
+        }
+
+        [data-theme="dark"] .footer-top-row {
+            border-bottom-color: rgba(240, 238, 233, 0.2);
+        }
+
+        .footer-identity {
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-identity:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-identity h2 {
+            font-size: clamp(2.5rem, 8vw, 6rem) !important;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .footer-identity p {
+            font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+
+        .footer-links-container {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            padding-bottom: 1rem;
+        }
+
+        .footer-link-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .footer-link-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .footer-link-item:hover::after {
+            width: 100%;
+        }
+
+        .footer-quote {
+            text-align: center;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            font-weight: 400;
+            opacity: 0.9;
+            letter-spacing: 0.02em;
+            padding-top: 2rem;
+            line-height: 1.4;
+        }
+
+        /* =========================================
+           ANIMATIONS & RESPONSIVENESS
+           ========================================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* TABLET STYLES */
+        @media (max-width: 1024px) {
+
+            .grid-2up,
+            .grid-4 {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-sm);
+            }
+
+            section {
+                min-height: auto;
+                padding: var(--spacing-md) var(--page-padding);
+            }
+
+            .browser-frame {
+                aspect-ratio: auto;
+                min-height: 50vh;
+            }
+
+            .mobile-carousel {
+                display: flex !important;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 1.5rem;
+                padding-bottom: 2rem;
+                padding-top: 1rem;
+            }
+
+            .mobile-carousel>* {
+                flex: 0 0 45vw;
+                scroll-snap-align: center;
+                height: auto;
+            }
+
+            .mobile-carousel::after {
+                content: '';
+                flex: 0 0 1px;
+                padding-right: var(--page-padding);
+            }
+        }
+
+        /* MOBILE STYLES */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            #custom-cursor {
+                display: none !important;
+            }
+
+            /* Notice #globalCloseDemo is NOT hidden here anymore! */
+
+            .floating-btn {
+                top: auto;
+                bottom: 20px;
+                right: var(--page-padding);
+            }
+
+            #themeToggle {
+                top: 20px;
+                bottom: auto;
+            }
+
+            .statement-text {
+                text-align: left;
+            }
+
+            .ratio-16-9 {
+                aspect-ratio: 4 / 3;
+            }
+
+            .ratio-3-4 {
+                aspect-ratio: 1 / 1;
+            }
+
+            .mobile-carousel>* {
+                flex: 0 0 75vw;
+            }
+
+            .footer-top-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 3rem;
+            }
+
+            .footer-links-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .footer-identity p {
+                letter-spacing: 0.1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div class="loader-text" id="loader-perc">00</div>
+    </div>
+    <div id="custom-cursor"></div>
+
+    <button class="floating-btn" id="themeToggle">Light Mode</button>
+    <button class="floating-btn" id="backToTop">↑ Top</button>
+    <button id="globalCloseDemo">✕ Close Demo</button>
+
+    <section id="page-1" class="full-bleed">
+        <video id="hero-vid" autoplay loop muted playsinline
+            poster="https://images.unsplash.com/photo-1618044733300-9472054094ee?w=1920&h=1080&fit=crop"
+            class="hero-media fade-in visible">
+            <source src="assets/hero.webm" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-corner" style="z-index: 10;">
+            <p class="section-label" style="line-height: 1; margin-bottom: 0.5rem;">PORTFOLIO</p>
+            <p class="tiny-text" style="color: #ffffff; opacity: 0.8; font-size: 1rem;">Visual and Identity Design</p>
+        </div>
+    </section>
+
+    <section id="page-2" class="fade-in" style="min-height: 80vh; align-items: center; justify-content: center;">
+        <h2 class="statement-text">I design <span class="accent-text" style="font-weight: 700;">brand identities</span>
+            and visual systems that translate strategy into <span class="accent-text" style="font-weight: 700;">lived
+                experiences</span>.</h2>
+    </section>
+
+    <div class="project-divider"></div>
+    <div class="chapter-marker fade-in">01</div>
+
+    <section class="full-bleed fade-in">
+        <video id="hero-vid" autoplay loop muted playsinline
+            poster="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1920&h=1080&fit=crop"
+            class="hero-media fade-in visible">
+            <source src="assets/VCR-BG.webm" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="project-title-center">
+            <h2 class="huge-text">VEENU</h2>
+            <p class="section-label" style="color: #fff; opacity: 0.9;">Cafe and Restaurant</p>
+        </div>
+    </section>
+
+    <section style="padding-top: 0;">
+
+        <div class="strategy-accordion fade-in">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">About</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            Veenu is a modern cafe and restaurant concept built around the idea of human connection. The
+                            brand's conceptual core is derived from the phonetic breakdown "V-EEN-U" bridging "We" and
+                            "You," establishing a welcoming, communal atmosphere.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">Problem</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            In a saturated hospitality market, casual dining spaces often struggle with visual
+                            fragmentation. They lack a cohesive, foundational narrative that makes the customer feel
+                            anchored and truly at home within the space.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">Solution</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            We engineered a sun-drenched, organic visual identity utilizing earthy Saffron and Green
+                            tones. The logo integrates an inverted, mirrored infinity-loop 'e' to silently communicate
+                            continuous trust, warmth, and connection across all physical touchpoints.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="chapter-heading">01 / Visuals</p>
+
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/v1691.webp"
+                alt="Veenu Detail" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/v1692.webp"
+                alt="Veenu Detail 2" class="ratio-16-9">
+        </div>
+        <div class="grid-2up fade-in">
+            <img loading="lazy" src="assets/v111.webp"
+                alt="Veenu Object" class="ratio-1-1">
+            <img loading="lazy" src="assets/v112.webp"
+                alt="Veenu Object 2" class="ratio-1-1">
+        </div>
+
+        <div class="grid-2up fade-in">
+            <img loading="lazy" src="assets/v341.webp"
+                alt="Veenu Menu" class="ratio-3-4">
+            <img loading="lazy" src="assets/v342.webp"
+                alt="Veenu Setup" class="ratio-3-4">
+        </div>
+
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/v1693.webp"
+                alt="Veenu Vibes" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/v1694.webp"
+                alt="Veenu Coffee" class="ratio-16-9">
+        </div>
+        
+<!--
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1559925313-b64db873154c?w=1600&h=900&fit=crop"
+                alt="Veenu Layout" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1600&h=900&fit=crop"
+                alt="Veenu Layout 2" class="ratio-16-9">
+        </div>
+        <div class="grid-2up fade-in">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1507133750070-4ba014b726bf?w=800&h=600&fit=crop"
+                alt="Veenu Detail" class="ratio-4-3">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1522881119565-df04e3895e34?w=800&h=600&fit=crop"
+                alt="Veenu Interior" class="ratio-4-3">
+        </div>
+-->
+        <p class="chapter-heading">02 / Campaign</p>
+
+        <div class="grid-4 mobile-carousel fade-in">
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/v9161.webp" alt="IG 1">
+            </div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/v9162.webp" alt="IG 2">
+            </div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/v9163.webp" alt="IG 3">
+            </div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/v9164.webp" alt="IG 4">
+            </div>
+        </div>
+
+        <p class="chapter-heading">03 / Live Demo Website</p>
+        <div class="browser-frame fade-in">
+            <div class="browser-top-bar">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <a href="https://israrrr.github.io/veenu-demo-website/" target="_blank" rel="noopener noreferrer"
+                    class="open-new-tab">[ ↗ Open in New Tab ]</a>
+            </div>
+            <div class="video-wrapper" data-demo-url="https://israrrr.github.io/veenu-demo-website/">
+                <div class="video-overlay">
+                    <div class="play-btn-text">LOAD LIVE WEBSITE</div>
+                </div>
+                <video autoplay loop muted playsinline>
+                    <source src="assets/VCR-Demo.webm" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <div class="project-divider"></div>
+    <div class="chapter-marker fade-in">02</div>
+
+    <section class="full-bleed fade-in">
+        <video id="hero-vid" autoplay loop muted playsinline
+            poster="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1920&h=1080&fit=crop"
+            class="hero-media fade-in visible">
+            <source src="assets/BkGr-BG.webm" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="project-title-center">
+            <h2 class="huge-text">BAKKENGROW</h2>
+            <p class="section-label" style="color: #fff; opacity: 0.9;">An Asset Management Company</p>
+        </div>
+    </section>
+
+    <section style="padding-top: 0;">
+
+        <div class="strategy-accordion fade-in">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">About</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            Bakkengrow is a Crypto Asset Management startup positioned specifically as "Institutional
+                            DeFi." The platform is designed to help young Indian professionals seamlessly navigate and
+                            build wealth in the digital economy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">Problem</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            The decentralized finance space inherently feels chaotic, highly complex, and untrustworthy
+                            to traditional investors who are looking for secure, long-term wealth generation without the
+                            stress of daily trading.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">Solution</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            We established a sleek, dark-mode brand system. By merging quotation marks (representing
+                            clarity) with an origami motif (shaping the future), the visual identity projects absolute
+                            institutional precision, trust, and security.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="chapter-heading">01 / Visuals</p>
+
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/b1691.webp"
+                alt="Dashboard" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/b1692.webp"
+                alt="Blueprint" class="ratio-16-9">
+        </div>
+
+        <div class="grid-2up fade-in">
+            <img loading="lazy" src="assets/b111.webp"
+                alt="App UI" class="ratio-1-1">
+            <img loading="lazy" src="assets/b112.webp"
+                alt="Social UI" class="ratio-1-1">
+        </div>
+
+        <div class="grid-2up fade-in">
+            <img loading="lazy" src="assets/b341.webp"
+                alt="App Icon" class="ratio-3-4">
+            <img loading="lazy" src="assets/b342.webp"
+                alt="Gradient" class="ratio-3-4">
+        </div>
+
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/b1693.webp"
+                alt="Web Isometric" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/b1694.webp"
+                alt="Typography" class="ratio-16-9">
+        </div>
+
+<!--
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop"
+                alt="Campaign Hero" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1600&h=900&fit=crop"
+                alt="Architecture" class="ratio-16-9">
+        </div>
+        <div class="grid-2up fade-in">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+                alt="Data" class="ratio-4-3">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop"
+                alt="Office" class="ratio-4-3">
+        </div>
+    -->
+        <p class="chapter-heading">02 / Campaign</p>
+
+        <div class="grid-4 mobile-carousel fade-in">
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/b9161.webp"
+                    alt="Screen 1"></div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/b9162.webp"
+                    alt="Screen 2"></div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/b9163.webp"
+                    alt="Screen 3"></div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/b9164.webp"
+                    alt="Screen 4"></div>
+        </div>
+
+        <p class="chapter-heading">03 / Live Demo Website</p>
+        <div class="browser-frame fade-in">
+            <div class="browser-top-bar">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <a href="https://israrrr.github.io/bakkengrow-demo-website/" target="_blank" rel="noopener noreferrer"
+                    class="open-new-tab">[ ↗ Open in New Tab ]</a>
+            </div>
+            <div class="video-wrapper" data-demo-url="https://israrrr.github.io/bakkengrow-demo-website/">
+                <div class="video-overlay">
+                    <div class="play-btn-text">LOAD LIVE WEBSITE</div>
+                </div>
+                <video autoplay loop muted playsinline>
+                    <source src="assets/BkGr-Demo.webm" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <div class="project-divider"></div>
+    <div class="chapter-marker fade-in">03</div>
+
+    <section class="full-bleed fade-in">
+        <video id="hero-vid" autoplay loop muted playsinline
+            poster="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=1920&h=1080&fit=crop"
+            class="hero-media fade-in visible">
+            <source src="assets/IS-BG.webm" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="project-title-center">
+            <h2 class="huge-text">ISRAR STUDIO</h2>
+            <p class="section-label" style="color: #fff; opacity: 0.9;">Nothing Is Imperfect</p>
+        </div>
+    </section>
+
+    <section style="padding-top: 0;">
+
+        <div class="strategy-accordion fade-in">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">About</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            Israr Studio is the self-identity system for a strategic creative professional operating at
+                            the intersection of brand strategy, narrative building, and high-end visual design.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">Problem</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            Design portfolios frequently prioritize aesthetic decoration over underlying logic,
+                            ultimately diluting the strategic thinking and problem-solving framework that clients are
+                            actually paying for.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="accordion-title">Solution</span>
+                    <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="accordion-inner-padding">
+                            We implemented a "Forensic Creative" aesthetic. Driven by clinical layouts, brutalist
+                            typography, and a stark palette of Deep Navy and Bone, the system strips away the
+                            unnecessary, framing the design work as irrefutable evidence.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="chapter-heading">01 / Visuals</p>
+
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/is1691.webp"
+                alt="Logo Grid" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/is1692.webp"
+                alt="Color System" class="ratio-16-9">
+        </div>
+        <div class="grid-2up fade-in">
+            <img loading="lazy" src="assets/is111.webp"
+                alt="Pattern Grid" class="ratio-1-1">
+            <img loading="lazy" src="assets/is112.webp"
+                alt="Editorial Spread" class="ratio-1-1">
+        </div>
+<!--
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=1600&h=900&fit=crop"
+                alt="Document" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1588534065360-141d5b357fc1?w=1600&h=900&fit=crop"
+                alt="Invoice" class="ratio-16-9">
+        </div>
+    -->
+        <div class="grid-2up fade-in">
+            <img loading="lazy" src="assets/is341.webp"
+                alt="Case Study Cover" class="ratio-3-4">
+            <img loading="lazy" src="assets/is342.webp"
+                alt="Process Sketches" class="ratio-3-4">
+        </div>
+
+        <p class="chapter-heading">02 / Thought Series</p>
+
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/is1693.webp"
+                alt="Case Study Cover" class="ratio-16-9">
+        </div>
+        <div class="grid-1up fade-in">
+            <img loading="lazy" src="assets/is1694.webp"
+                alt="Process Slide" class="ratio-16-9">
+        </div>
+
+        <p class="chapter-heading">03 / Campaign</p>
+        
+        <div class="grid-4 mobile-carousel fade-in">
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/is9161.webp" alt="Screen 1">
+            </div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/is9162.webp" alt="Screen 2"></div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/is9163.webp" alt="Screen 3">
+            </div>
+            <div class="screen-mockup"><img loading="lazy"
+                    src="assets/is9164.webp" alt="Screen 4">
+            </div>
+        </div>
+
+        <p class="chapter-heading">03 / Live Demo Website</p>
+        <div class="browser-frame fade-in">
+            <div class="browser-top-bar">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <a href="https://israrrr.github.io/israr-ahmed-portfolio-2025/" target="_blank"
+                    rel="noopener noreferrer" class="open-new-tab">[ ↗ Open in New Tab ]</a>
+            </div>
+            <div class="video-wrapper" data-demo-url="https://israrrr.github.io/israr-ahmed-portfolio-2025/">
+                <div class="video-overlay">
+                    <div class="play-btn-text">LOAD LIVE WEBSITE</div>
+                </div>
+                <video autoplay loop muted playsinline>
+                    <source src="assets/IS-demo.webm" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-19" class="fade-in">
+
+        <div class="footer-top-row">
+            <div>
+                <a href="#page-1" class="footer-identity">
+                    <h2 class="section-label">Israr Ahmed</h2>
+                    <p class="tiny-text">Strategy & Visual Identity Design</p>
+                </a>
+            </div>
+
+            <div class="footer-links-container">
+                <a href="mailto:i.israrahmed08@gmail.com" class="footer-link-item">Email</a>
+                <a href="https://www.linkedin.com/in/israr--ahmed/" class="footer-link-item">LinkedIn</a>
+                <a href="https://linktr.ee/israr._.ahmed/" class="footer-link-item">LinkTree</a>
+            </div>
+        </div>
+
+        <div class="footer-quote fade-in">
+            For <span class="accent-text" style="font-weight: 700;">Brand Parents</span>.<br>
+            "If You have a <span class="accent-text" style="font-weight: 700;">Brand</span>.
+            You're raising a <span class="accent-text" style="font-weight: 700;">Child</span>."
+        </div>
+
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // 1. "IMPERFECT SEQUENCE" PRELOADER LOGIC
+            const percEl = document.getElementById('loader-perc');
+            const preloader = document.getElementById('preloader');
+            document.body.style.overflow = 'hidden';
+
+            const stages = [0, 14, 38, 72, 89, 99, 100];
+            let currentStage = 0;
+
+            const loadNext = () => {
+                if (currentStage >= stages.length) return;
+                let val = stages[currentStage];
+                percEl.textContent = val < 10 ? '0' + val : val;
+
+                if (val < 100) {
+                    percEl.className = 'loader-text ' + (Math.random() > 0.5 ? 'glitch-1' : 'glitch-2');
+                    let nextDelay = Math.random() * 300 + 150;
+                    currentStage++;
+                    setTimeout(loadNext, nextDelay);
+                } else {
+                    percEl.className = 'loader-text perfect';
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        document.body.style.overflow = '';
+                        setTimeout(() => preloader.style.visibility = 'hidden', 800);
+                    }, 600);
+                }
+            };
+            setTimeout(loadNext, 300);
+
+            // 2. CUSTOM CURSOR & BOUNDARY FIX
+            const cursor = document.getElementById('custom-cursor');
+            if (window.matchMedia("(pointer: fine)").matches) {
+                document.addEventListener('mousemove', (e) => {
+                    if (e.clientX >= window.innerWidth - 15) {
+                        cursor.style.opacity = '0';
+                    } else {
+                        cursor.style.opacity = '1';
+                        cursor.style.left = e.clientX + 'px';
+                        cursor.style.top = e.clientY + 'px';
+                    }
+                });
+
+                document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+                document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
+
+                document.querySelectorAll('a, button, .theme-toggle, .video-overlay, #globalCloseDemo, .accordion-header').forEach(el => {
+                    el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                    el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+                });
+            }
+
+            // 3. SCROLL FADE ANIMATIONS
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.10 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // 4. THEME TOGGLE WITH MEMORY
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggleBtn.textContent = 'Light Mode';
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggleBtn.textContent = 'Dark Mode';
+                }
+                localStorage.setItem('israrTheme', theme);
+            };
+
+            let savedTheme = localStorage.getItem('israrTheme');
+            let currentTheme = savedTheme ? savedTheme : (prefersDarkScheme.matches ? 'dark' : 'light');
+            applyTheme(currentTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(currentTheme);
+            });
+            prefersDarkScheme.addEventListener('change', (e) => {
+                if (!localStorage.getItem('israrTheme')) applyTheme(e.matches ? 'dark' : 'light');
+            });
+
+            // 5. IFRAME LIVE DEMO LOGIC
+            const globalCloseBtn = document.getElementById('globalCloseDemo');
+            let currentActiveWrapper = null;
+            let currentActiveTabLink = null;
+
+            document.querySelectorAll('.browser-frame').forEach(frame => {
+                const wrapper = frame.querySelector('.video-wrapper');
+                const tabLink = frame.querySelector('.open-new-tab');
+                if (!wrapper || !wrapper.hasAttribute('data-demo-url')) return;
+
+                const url = wrapper.getAttribute('data-demo-url');
+                const overlay = wrapper.querySelector('.video-overlay');
+
+                overlay.addEventListener('click', () => {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = url;
+                    iframe.className = 'demo-iframe';
+
+                    wrapper.appendChild(iframe);
+                    wrapper.classList.add('demo-active');
+                    if (tabLink) tabLink.classList.add('visible');
+
+                    currentActiveWrapper = wrapper;
+                    currentActiveTabLink = tabLink;
+                    globalCloseBtn.classList.add('visible');
+                });
+            });
+
+            globalCloseBtn.addEventListener('click', () => {
+                if (currentActiveWrapper) {
+                    const iframe = currentActiveWrapper.querySelector('.demo-iframe');
+                    if (iframe) iframe.remove();
+                    currentActiveWrapper.classList.remove('demo-active');
+                }
+                if (currentActiveTabLink) {
+                    currentActiveTabLink.classList.remove('visible');
+                }
+                globalCloseBtn.classList.remove('visible');
+                currentActiveWrapper = null;
+                currentActiveTabLink = null;
+            });
+
+            // 6. SMOOTH SCROLL FOR FOOTER ANCHOR
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 7. HERO VIDEO PERFORMANCE OPTIMIZER
+            const heroVideos = document.querySelectorAll('.hero-vid');
+            if (heroVideos.length > 0) {
+                const videoObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.play().catch(e => console.log("Autoplay prevented"));
+                        } else {
+                            entry.target.pause();
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                heroVideos.forEach(video => {
+                    videoObserver.observe(video);
+                });
+            }
+
+            // 8. BACK TO TOP BUTTON LOGIC
+            const backToTopBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // 9. STRATEGY ACCORDION LOGIC
+            document.querySelectorAll('.accordion-header').forEach(button => {
+                button.addEventListener('click', () => {
+                    const item = button.parentElement;
+                    const isActive = item.classList.contains('active');
+
+                    const parentGroup = item.closest('.strategy-accordion');
+                    parentGroup.querySelectorAll('.accordion-item').forEach(child => {
+                        child.classList.remove('active');
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+
+</html>
